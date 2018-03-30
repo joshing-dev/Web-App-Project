@@ -19,10 +19,29 @@
     <script src="makeItRain.js" > </script>
 
     <script>
-        //$("#rain").makeItRain();
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function random_rgb() {
+            colors = ['8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+            r = colors[Math.floor(Math.random() * 8)];
+            g = colors[Math.floor(Math.random() * 8)];
+            b = colors[Math.floor(Math.random() * 8)];
+            return '#' + r + g + b;
+        }
+
+        function cashMeOutsideTextChanger(){
+            $("#cashMeText").each(function() {
+                this.style.color = random_rgb();
+            });
+            sleep(500).then(() => {
+                requestAnimationFrame(cashMeOutsideTextChanger);
+            });
+        }
 
         $(document).ready(function(){
-            //$("#rain").click(function(){makeItRain()});
+            requestAnimationFrame(cashMeOutsideTextChanger);
             $("#rain").makeItRain();
         });
     </script>
@@ -54,7 +73,11 @@
         <small id="passwordHelp" class="form-text text-muted">Totally not secure.</small>
     </div>
 
-    <button id="rain" type="button" class="btn btn-primary">Cash me outside</button>
+    <button id="rain" type="button" class="btn btn-primary">
+        <p id="cashMeText">
+            <b>Cash me outside</b>
+        </p>
+    </button>
     <br><br>
 
     <button type="submit" class="btn btn-primary">Submit</button>
