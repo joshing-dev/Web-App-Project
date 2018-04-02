@@ -30,7 +30,7 @@
         }
 
         function cashMeOutsideTextChanger(){
-            $("#cashMeText").each(function() {
+            $("#rain").each(function() {
                 this.style.color = random_rgb();
             });
             sleep(500).then(() => {
@@ -47,16 +47,10 @@
 <body>
 <ul class="nav justify-content-center">
     <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
+        <a class="nav-link active" href="#">Home</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link" href="#">Don't go here</a>
     </li>
 </ul>
 <form action="./information_submit.php"  method="post">
@@ -72,9 +66,7 @@
     </div>
 
     <button id="rain" type="button" class="btn btn-primary">
-        <p id="cashMeText">
-            <b>Cash me outside</b>
-        </p>
+        Cash me outside
     </button>
     <br><br>
 
