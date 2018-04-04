@@ -19,7 +19,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="shortcut icon" href="images/favicon.ico"/>
-    <title>Joke Emporium</title>
+    <title>Meme Emporium</title>
     <link rel="stylesheet" type="text/css" href="css/makeItRain.css">
 
     <script
@@ -72,25 +72,27 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     </script>
 </head>
 <body>
-<ul class="nav justify-content-center">
-    <li class="nav-item">
-        <a class="nav-link active" href="#">Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="logout.php">Logout</a>
-    </li>
-</ul>
+<?php require "headerLinks.php"; ?>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <button id="rain" type="button" class="btn btn-primary">
+                Cash me outside
+            </button>
+        </div>
+        <div class="col-sm">
+            <label for="ajaxInput">Ajax username to look up</label>
+            <input id="ajaxInput" type="text"/>
+            <button id="ajax" type="button" class="btn btn-primary" onclick="ajaxClick()">
+                Ajax test
+            </button>
+            <p id="response"></p>
+        </div>
+        <div class="col-sm">
+        </div>
+    </div>
+</div>
 
-<button id="rain" type="button" class="btn btn-primary">
-    Cash me outside
-</button>
-<br>
-<label for="ajaxInput">Ajax username to look up</label>
-<br>
-<input id="ajaxInput" type="text"/>
-<button id="ajax" type="button" class="btn btn-primary" onclick="ajaxClick()">
-    Ajax test
-</button>
-<p id="response"></p>
+
 </body>
 </html>
