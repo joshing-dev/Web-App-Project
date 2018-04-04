@@ -3,7 +3,7 @@
 session_start();
 
 // If session variable is not set it will redirect to login page
-if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     header("location: login.php");
     exit;
 }
@@ -22,8 +22,9 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     <title>Joke Emporium</title>
     <link rel="stylesheet" type="text/css" href="css/makeItRain.css">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -55,6 +56,15 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
             });
         }
 
+        function ajaxClick() {
+            var username = $("#ajaxInput").val();
+            $.ajax({
+                url: "ajaxReceiver.php", dataType: "json", data: {username: username}, success: (result) => {
+                    console.log(result);
+                    $("#response").html(result[0].username + "/" + result[0].password + "/" + result[0].created_at);
+                }
+            });
+        };
         $(document).ready(() => {
             requestAnimationFrame(cashMeOutsideTextChanger);
             $("#rain").makeItRain();
@@ -74,7 +84,13 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 <button id="rain" type="button" class="btn btn-primary">
     Cash me outside
 </button>
-
-
+<br>
+<label for="ajaxInput">Ajax username to look up</label>
+<br>
+<input id="ajaxInput" type="text"/>
+<button id="ajax" type="button" class="btn btn-primary" onclick="ajaxClick()">
+    Ajax test
+</button>
+<p id="response"></p>
 </body>
 </html>
