@@ -70,15 +70,19 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             $("#rain").makeItRain();
         });
     </script>
+    <style type="text/css">
+        #rain {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
 </head>
 <body>
 <?php require "headerLinks.php"; ?>
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            <button id="rain" type="button" class="btn btn-primary">
-                Cash me outside
-            </button>
         </div>
         <div class="col-sm">
             <label for="ajaxInput">Ajax username to look up</label>
@@ -90,6 +94,9 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         </div>
         <div class="col-sm">
         </div>
+        <button id="rain" type="button" class="btn btn-primary">
+            Cash me outside
+        </button>
     </div>
 </div>
 
