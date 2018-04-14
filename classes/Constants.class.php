@@ -16,6 +16,7 @@
 		public $TERM_PATH = '/learn/api/public/v1/terms';
 		public $COURSE_PATH = '/learn/api/public/v1/courses';
 		public $USER_PATH = '/learn/api/public/v1/users';
+		public $ANNOUNCEMENTS_PATH = '/learn/api/public/v1/announcements';
 
 		public $ssl_verify_peer = FALSE;
 		public $ssl_verify_host =  FALSE;

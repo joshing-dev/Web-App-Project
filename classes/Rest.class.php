@@ -210,6 +210,37 @@ class Rest
 
         return $GradebookGrades;
     }
+
+    public function readAnnouncements($access_token, $announcement_id)
+    {
+        $constants = new Constants($this->clientURL);
+        $announcement = new Announcement();
+
+        $request = new HTTP_Request2($constants->HOSTNAME . $constants->ANNOUNCEMENTS_PATH . '/' . $announcement_id, HTTP_Request2::METHOD_GET);
+        $request->setHeader('Authorization', 'Bearer ' . $access_token);
+        $request->setConfig(array(
+            'ssl_verify_peer' => $constants->ssl_verify_peer,
+            'ssl_verify_host' => $constants->ssl_verify_host
+        ));
+
+
+        try {
+            $response = $request->send();
+            if (200 == $response->getStatus()) {
+                print "\n Read Announcement...\n";
+                $course = json_decode($response->getBody());
+            } else {
+                print 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+                    $response->getReasonPhrase();
+                $BbRestException = json_decode($response->getBody());
+                var_dump($BbRestException);
+            }
+        } catch (HTTP_Request2_Exception $e) {
+            print 'Error: ' . $e->getMessage();
+        }
+
+        return $announcement;
+    }
 }
 
 ?>

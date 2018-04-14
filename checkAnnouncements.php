@@ -25,8 +25,7 @@
 <body>
 <?php require "headerLinks.php"; ?>
 <?php
-/* Pulls student grades from Bb */
-$course_id = $_GET['course_id'];
+$announcement_id = $_GET['announcement_id'];
 $clientURL = "http://bb.dataii.com:8080";
 
 require_once('classes/Rest.class.php');
@@ -37,10 +36,10 @@ $token = new Token();
 
 $token = $rest->authorize();
 $access_token = $token->access_token;
-$columns = $rest->readGradebookColumns($access_token, $course_id);
+$columns = $rest->readAnnouncements($access_token, $announcement_id);
 $c = $columns->results;
+//print_r($columns);
 
-/* Pulls desired data */
 foreach ($c as $row) {
     //if ($row->externalGrade == 1)
     if ($row->name == "Total") {
@@ -54,11 +53,10 @@ foreach ($c as $row) {
 
 $grades = $rest->readGradebookGrades($access_token, $course_id, $finalGradeID);
 
-/* Formats grades for each user */
 $g = $grades->results; ?>
 <ul class="list-group">
     <?php
-    foreach ($g as $row) {
+    foreach ($c as $row) {
         $user = $rest->readUser($access_token, $row->userId);
         if (empty($row->score)) { ?>
             <li class="list-group-item"><?php echo $user->name->given . " " . $user->name->family . " has 0 out of " . $finalPossible . " points."; ?></li>
