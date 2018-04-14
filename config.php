@@ -1,4 +1,5 @@
 <?php
+/* Setup for database connection */
 define('DB_SERVER', '34.224.83.184');
 define('DB_USERNAME', 'student3');
 define('DB_PASSWORD', 'phppass3');

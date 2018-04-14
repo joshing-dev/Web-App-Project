@@ -1,4 +1,5 @@
 <?php
+/* Deals with validation of a user using ajax */
 require_once  "config.php";
 $query = "select * from login_information where username LIKE '$_GET[username]'";
 $results = array();

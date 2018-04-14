@@ -34,6 +34,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             crossorigin="anonymous"></script>
     <script src="js/makeItRain.js"></script>
 
+    <!-- Setup for cash me outside javascript fun -->
     <script>
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
@@ -56,6 +57,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             });
         }
 
+        /* ajax call */
         function ajaxClick() {
             var username = $("#ajaxInput").val();
             $.ajax({
@@ -80,6 +82,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 </head>
 <body>
 <?php require "headerLinks.php"; ?>
+<!-- Formatting for webpage -->
 <div class="container">
     <div class="row">
         <div class="col-sm">

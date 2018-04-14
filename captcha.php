@@ -1,5 +1,5 @@
 <?PHP
-
+/* Adds and verifies captcha functionality */
 $allowLogin = false;
 $response = $_POST["g-recaptcha-response"];
 $url = 'https://www.google.com/recaptcha/api/siteverify';

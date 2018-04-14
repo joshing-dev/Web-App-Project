@@ -1,5 +1,5 @@
 <?php
-
+/* Creates new user and adds to db */
 require "config.php";
 if(!empty($_POST[email]) && !empty($_POST[password])) {
     $l = mysqli_connect("34.224.83.184", "student3", "phppass3", "student3");

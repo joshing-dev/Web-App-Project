@@ -25,6 +25,7 @@
 <body>
 <?php require "headerLinks.php"; ?>
 <?php
+/* Pulls student grades from Bb */
 $course_id = $_GET['course_id'];
 $clientURL = "http://bb.dataii.com:8080";
 
@@ -39,6 +40,7 @@ $access_token = $token->access_token;
 $columns = $rest->readGradebookColumns($access_token, $course_id);
 $c = $columns->results;
 
+/* Pulls desired data */
 foreach ($c as $row) {
     //if ($row->externalGrade == 1)
     if ($row->name == "Total") {
@@ -52,6 +54,7 @@ foreach ($c as $row) {
 
 $grades = $rest->readGradebookGrades($access_token, $course_id, $finalGradeID);
 
+/* Formats grades for eahc user */
 $g = $grades->results; ?>
 <ul class="list-group">
     <?php

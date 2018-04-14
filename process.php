@@ -1,4 +1,5 @@
 <?PHP
+/* Logic to deal with login and verification */
 session_start();
 require('captcha.php');
 
