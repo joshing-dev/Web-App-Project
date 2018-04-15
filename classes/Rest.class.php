@@ -226,7 +226,6 @@ class Rest
         try {
             $response = $request->send();
             if (200 == $response->getStatus()) {
-                print "\n Read Announcement...\n";
                 $announcements = json_decode($response->getBody());
             } else {
                 print 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .

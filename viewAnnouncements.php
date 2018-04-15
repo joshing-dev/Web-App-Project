@@ -24,13 +24,15 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<?php require "headerLinks.php"; ?>
 <?PHP
-$l=mysqli_connect("34.224.83.184","student3","phppass3","student3");
+
+require "headerLinks.php";
+require_once 'config.php';
+
 
 $query = "select * from announcements ";
 
-$r = mysqli_query($l, $query);
+$r = mysqli_query($link, $query);
 
 echo "<table border=1 cellpadding=10 >";
 echo "<tr><th>id</th><th>Title</th><th>Body</th></tr>";
