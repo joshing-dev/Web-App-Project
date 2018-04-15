@@ -51,7 +51,15 @@ foreach($c as $row)
     }
 }
 
-
+$l=mysqli_connect("34.224.83.184","student3","phppass3","student3");
+$delete = "delete from announcements where 1 = 1";
+mysqli_query($l,$delete);
+foreach ($c as $row) {    
+    $insert = "insert into announcements(id, title, body) 
+               values('{$announcement->id}', '{$announcement->title}', '{$announcement->body}') ";
+    mysqli_query($l,$insert);
+}
+echo "Users table updated.";
 
 ?>
 </body>
