@@ -56,16 +56,38 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                 requestAnimationFrame(cashMeOutsideTextChanger);
             });
         }
-
-        /* ajax call */
-        function ajaxClick() {
-            var username = $("#ajaxInput").val();
+        function updateAnnouncements() {
             $.ajax({
-                url: "ajaxReceiver.php", dataType: "json", data: {username: username}, success: (result) => {
-                    console.log(result);
-                    $("#response").html(result[0].username + "/" + result[0].password + "/" + result[0].created_at);
+                url: "checkAnnouncements.php", dataType: "text", success: (result) => {
+                    alert(result);
                 }
             });
+        }
+        function lookupAnnouncements() {
+            $.ajax({
+                url: "viewAnnouncements.php", dataType: "json", success: (result) => {
+                    console.log(result);
+                    var tableHead = jQuery("#announcementTable thead");
+                    var tableBody = jQuery("#announcementTable tbody");
+                    tableHead.empty();
+                    tableBody.empty();
+                    var header = "<tr><th>Title</th><th>Body</th></tr>";
+                    tableHead.append(header);
+                    for(var i = 0; i < result.length; i++) {
+                        try {
+                            var markup = "<tr><td>"+result[i].title+"</td><td>"+result[i].body+"</td></tr>";
+                            tableBody.append(markup);
+
+                        } catch(ex) {
+                            console.log("Error with announcement lookup: " + ex);
+                        }
+                    }
+                }
+            });
+        }
+        /* ajax call */
+        function lookupUsername() {
+
         };
         $(document).ready(() => {
             requestAnimationFrame(cashMeOutsideTextChanger);
@@ -83,17 +105,27 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 <body>
 <?php require "headerLinks.php"; ?>
 <!-- Formatting for webpage -->
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm">
+            <button id="updateAnnouncements" type="button" class="btn btn-primary" onclick="updateAnnouncements()">
+                Update Announcements
+            </button>
+            <button id="announcementButton" type="button" class="btn btn-primary" onclick="lookupAnnouncements()">
+                View Announcements
+            </button>
+            <table id="announcementTable" class="table table-striped">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
         </div>
         <div class="col-sm">
-            <label for="ajaxInput">Ajax username to look up</label>
-            <input id="ajaxInput" type="text"/>
-            <button id="ajax" type="button" class="btn btn-primary" onclick="ajaxClick()">
-                Ajax test
+            <label for="usernameLookup">Ajax username to look up</label>
+            <input id="usernameLookup" type="text"/>
+            <button id="usernameButton" type="button" class="btn btn-primary" onclick="lookupUsername()">
+                Look up username
             </button>
-            <p id="response"></p>
+            <p id="usernameResponse"></p>
         </div>
         <div class="col-sm">
         </div>
