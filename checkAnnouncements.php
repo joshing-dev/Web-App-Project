@@ -25,7 +25,6 @@
 <body>
 <?php require "headerLinks.php"; ?>
 <?php
-$announcement_id = $_GET['announcement_id'];
 $clientURL = "http://bb.dataii.com:8080";
 
 require_once('classes/Rest.class.php');
@@ -36,26 +35,27 @@ $token = new Token();
 
 $token = $rest->authorize();
 $access_token = $token->access_token;
-$columns = $rest->readAnnouncements($access_token, $announcement_id);
+$columns = $rest->readAnnouncements($access_token);
 $c = $columns->results;
-//print_r($columns);
+print_r($columns);
 
-foreach ($c as $row) {
-    //if ($row->externalGrade == 1)
-    if ($row->name == "Total") {
-        $finalGradeName = $row->name;
-        $finalGradeID = $row->id;
-        $finalPossible = $row->score->possible;
-        break;
-    }
-}
+// foreach ($c as $row) {
+//     //if ($row->externalGrade == 1)
+//     if ($row->name == "Total") {
+//         $finalGradeName = $row->name;
+//         $finalGradeID = $row->id;
+//         $finalPossible = $row->score->possible;
+//         break;
+//     }
+// }
 
 
-$grades = $rest->readGradebookGrades($access_token, $course_id, $finalGradeID);
+// $grades = $rest->readGradebookGrades($access_token, $course_id, $finalGradeID);
 
-$g = $grades->results; ?>
+// $g = $grades->results; 
+?>
 <ul class="list-group">
-    <?php
+    <!-- <?php
     foreach ($c as $row) {
         $user = $rest->readUser($access_token, $row->userId);
         if (empty($row->score)) { ?>
@@ -66,7 +66,7 @@ $g = $grades->results; ?>
         <?php
         }
 
-    } ?>
+    } ?> -->
 </ul>
 </body>
 </html>

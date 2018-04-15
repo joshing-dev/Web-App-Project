@@ -211,12 +211,11 @@ class Rest
         return $GradebookGrades;
     }
 
-    public function readAnnouncements($access_token, $announcement_id)
+    public function readAnnouncements($access_token)
     {
         $constants = new Constants($this->clientURL);
-        $announcement = new Announcement();
 
-        $request = new HTTP_Request2($constants->HOSTNAME . $constants->ANNOUNCEMENTS_PATH . '/' . $announcement_id, HTTP_Request2::METHOD_GET);
+        $request = new HTTP_Request2($constants->HOSTNAME . $constants->ANNOUNCEMENTS_PATH, HTTP_Request2::METHOD_GET);
         $request->setHeader('Authorization', 'Bearer ' . $access_token);
         $request->setConfig(array(
             'ssl_verify_peer' => $constants->ssl_verify_peer,
@@ -228,7 +227,7 @@ class Rest
             $response = $request->send();
             if (200 == $response->getStatus()) {
                 print "\n Read Announcement...\n";
-                $course = json_decode($response->getBody());
+                $announcements = json_decode($response->getBody());
             } else {
                 print 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
                     $response->getReasonPhrase();
@@ -239,7 +238,7 @@ class Rest
             print 'Error: ' . $e->getMessage();
         }
 
-        return $announcement;
+        return $announcements;
     }
 }
 
