@@ -39,35 +39,21 @@ $columns = $rest->readAnnouncements($access_token);
 $c = $columns->results;
 print_r($columns);
 
-// foreach ($c as $row) {
-//     //if ($row->externalGrade == 1)
-//     if ($row->name == "Total") {
-//         $finalGradeName = $row->name;
-//         $finalGradeID = $row->id;
-//         $finalPossible = $row->score->possible;
-//         break;
-//     }
-// }
+foreach($c as $row)
+{
+    //if ($row->externalGrade == 1)
+    if ($row->id == "id")
+    {
+        $id=$row->id;
+        $title=$row->title;
+        $body=$row->body;
+        break;
+    }
+}
 
 
-// $grades = $rest->readGradebookGrades($access_token, $course_id, $finalGradeID);
 
-// $g = $grades->results; 
 ?>
-<ul class="list-group">
-    <!-- <?php
-    foreach ($c as $row) {
-        $user = $rest->readUser($access_token, $row->userId);
-        if (empty($row->score)) { ?>
-            <li class="list-group-item"><?php echo $user->name->given . " " . $user->name->family . " has 0 out of " . $finalPossible . " points."; ?></li>
-            <?php
-        } else { ?>
-            <li class="list-group-item"><?php echo $user->name->given . " " . $user->name->family . " has " . $row->score . " out of " . $finalPossible . " points." . "</p>"; ?></li>
-        <?php
-        }
-
-    } ?> -->
-</ul>
 </body>
 </html>
 
