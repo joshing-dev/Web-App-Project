@@ -133,8 +133,8 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             <button id="rain" type="button" class="btn btn-primary">
                 Cash me outside
             </button>
-            <button id="yolo" type="button" class="btn btn-primary">
-                Don't press this
+            <button id="yolo" type="button" class="btn btn-primary btn-danger">
+                DoN't PrEsS tHiS
             </button>
         </div>
 
