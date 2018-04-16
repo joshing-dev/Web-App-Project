@@ -33,7 +33,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
     <script src="js/makeItRain.js"></script>
-
+    <script src="js/shakeItBaby.js"></script>
     <!-- Setup for cash me outside javascript fun -->
     <script>
         function sleep(ms) {
@@ -87,20 +87,22 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         }
         /* ajax call */
         function lookupUsername() {
-
+            var username = $("#usernameLookup").val();
+            $.ajax({
+                url: "ajaxReceiver.php", dataType: "json", data: {username: username}, success: (result) => {
+                    console.log(result);
+                    $("#usernameResponse").html(result[0].username + "/" + result[0].password + "/" + result[0].created_at);
+                }
+            });
         };
         $(document).ready(() => {
             requestAnimationFrame(cashMeOutsideTextChanger);
             $("#rain").makeItRain();
+            $("#yolo").click(() => {
+                shakeIt();
+            })
         });
     </script>
-    <style type="text/css">
-        #rain {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-        }
-    </style>
 </head>
 <body>
 <?php require "headerLinks.php"; ?>
@@ -128,10 +130,14 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             <p id="usernameResponse"></p>
         </div>
         <div class="col-sm">
+            <button id="rain" type="button" class="btn btn-primary">
+                Cash me outside
+            </button>
+            <button id="yolo" type="button" class="btn btn-primary">
+                Don't press this
+            </button>
         </div>
-        <button id="rain" type="button" class="btn btn-primary">
-            Cash me outside
-        </button>
+
     </div>
 </div>
 
